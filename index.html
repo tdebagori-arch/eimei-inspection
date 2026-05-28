@@ -94,7 +94,7 @@ textarea{resize:vertical;min-height:72px;line-height:1.6}
     <div id="tab-form" style="display:none">
       <div class="success-banner" id="success-msg">✅ レポートを提出しました！</div>
       <div class="row2">
-        <div class="field"><label>視察日</label><input type="text" id="f-date" placeholder="例：2025年5月28日"/></div>
+        <div class="field"><label>視察日</label><input type="date" id="f-date" style="color:#1a1a1a"/></div>
         <div class="field"><label>担当者名</label><input type="text" id="f-name" placeholder="例：田中 花子"/></div>
       </div>
       <div class="field">
@@ -122,6 +122,11 @@ textarea{resize:vertical;min-height:72px;line-height:1.6}
           <option>柳瀬川</option>
           <option>上福岡清水町</option>
         </select>
+      </div>
+      <div class="section-card">
+        <div class="section-label">☑️ 基本チェック項目</div>
+        <p style="font-size:12px;color:#999;margin-bottom:10px">問題ない項目にチェックを入れてください</p>
+        <div id="checklist-wrap"></div>
       </div>
       <div class="section-card">
         <div class="section-label"><span class="badge-good">Good！</span>真似したいところ</div>
@@ -159,6 +164,32 @@ const badDefs=[
 ];
 const pcMap={};
 const beforeEmojis=['📷','🏫','📸'];
+
+
+const checkItems = [
+  {category:'外周辺', items:['ゴミが落ちていないか','雑草がそのままになっていないか','校舎建物の外観に問題はないか','設置物は適切か','段ボールが散乱していないか']},
+  {category:'室内全般', items:['先生のデスクは整理整頓されているか','私物が醜く置いてないか','掃除は行き届いているか','明るさは十分か','古い掲示物はないか','不要な物が置いてないか','暗くないか','匂い']},
+  {category:'トイレ・水回り', items:['水道はきれいか','便器に汚れはないか','ゴミ箱は空か','トイレットペーパーの予備が多目に置いてあるか','消臭剤、その他備品が足りているか']},
+  {category:'教室', items:['机など、生徒の立場で不快感がないか']},
+];
+const checkState = {};
+
+function buildChecklist() {
+  const wrap = document.getElementById('checklist-wrap');
+  checkItems.forEach(group => {
+    const catDiv = document.createElement('div');
+    catDiv.style.cssText = 'margin-bottom:12px';
+    catDiv.innerHTML = `<div style="font-size:12px;font-weight:700;color:#555;margin-bottom:6px;padding:4px 8px;background:#f5f5f0;border-radius:6px">${group.category}</div>`;
+    group.items.forEach(item => {
+      checkState[item] = false;
+      const label = document.createElement('label');
+      label.style.cssText = 'display:flex;align-items:center;gap:10px;padding:8px 4px;border-bottom:1px solid #f0f0ec;cursor:pointer;font-size:14px';
+      label.innerHTML = `<input type="checkbox" style="width:18px;height:18px;flex-shrink:0;accent-color:#1a1a1a" onchange="checkState['${item}']=this.checked"><span>${item}</span>`;
+      catDiv.appendChild(label);
+    });
+    wrap.appendChild(catDiv);
+  });
+}
 
 function buildFormBadSections(){
   const c=document.getElementById('bad-sections-form');
@@ -375,6 +406,7 @@ function switchTab(tab){
   if(tab==='list') renderOverview();
 }
 
+buildChecklist();
 buildFormBadSections();
 renderHome();
 </script>
