@@ -199,32 +199,8 @@ function submitReport(){
   document.getElementById('f-mybranch').value='';
 }
 
-// サンプルデータ
-const reports=[
-  {
-    branch:'渋谷校',date:'2025年5月20日',inspector:'山田 太郎',
-    issues:[
-      {label:'外周辺',text:'駐輪場の自転車が雑然と並んでいる。通路を塞いでいる。',done:false,hasAfterPhoto:false,comment:''},
-      {label:'入り口・ロビー周辺',text:'ウェルカムボードの日付が更新されていない。',done:true,hasAfterPhoto:true,comment:'当日中に更新しました！'},
-      {label:'教室',text:'302号室：椅子の脚のゴムが外れており床が傷つく恐れあり。',done:false,hasAfterPhoto:false,comment:''},
-    ],showDetail:false
-  },
-  {
-    branch:'池袋校',date:'2025年5月15日',inspector:'佐藤 美咲',
-    issues:[
-      {label:'入り口・ロビー周辺',text:'スリッパの置き方がバラバラ。来客時の印象が悪い。',done:true,hasAfterPhoto:true,comment:'棚を新設して整頓しました。'},
-      {label:'トイレ・水回り',text:'ペーパータオルのゴミ箱が満杯になっていた。',done:true,hasAfterPhoto:true,comment:'補充＆清掃済みです。'},
-    ],showDetail:false
-  },
-  {
-    branch:'新宿校',date:'2025年5月10日',inspector:'鈴木 健太',
-    issues:[
-      {label:'外周辺',text:'看板の電球が切れている。',done:false,hasAfterPhoto:false,comment:''},
-      {label:'トイレ・水回り',text:'鏡に水垢が目立つ。',done:false,hasAfterPhoto:false,comment:''},
-      {label:'教室',text:'101号室：エアコンのフィルターにほこりが溜まっている。',done:false,hasAfterPhoto:false,comment:''},
-    ],showDetail:false
-  }
-];
+
+const reports=[];
 
 function getTopIssues(){
   const countMap={},exMap={};
